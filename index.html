@@ -13,7 +13,7 @@
     <div id ="todosjuntos" class="todosjuntos"></div>
     
     <p>YOUR CHARACTER</p>
-    <div id ="you" class="you">YOU </div>
+    <div id ="you" class="you"> </div>
 
     
     <p>ENEMIES</p>
@@ -75,9 +75,14 @@
         }
 
         
-        //---enseguida voy a hacer los eventos de click para poder seleccionar a los oponentes
-        
+        //aqui voy a almacenar las vidas,
+        //esto no se mostrará en pantalla, pero me sirve para 
+        //dar por terminado el juego luego de haber matado a todos
+        var vidas = 0;
 
+
+
+ //---enseguida voy a hacer los eventos de click para poder seleccionar a los oponentes
         
         //aqui hago una función para seleccionar cualquier your character y el
         //resto moverlos a enemigos
@@ -112,19 +117,18 @@
 
                 //inicio el score en el número que ya traia cada personaje,para poder utilizarlo más adelante
                 
-                var inicializar =100;
-               var inicio= 100;
-               
                 
+               var reset = $("#you p").html();
+               
                 
                 $("#ataque").on("click",function(){
                     
                     //genero número random para mi
-                    var randomyo = Math.floor(Math.random() * 100+500);
+                    var randomyo = Math.floor(Math.random() * 500);
                     $(".miataque").text("mi ataque es" + " " + randomyo);
                     
                     //genero número random para el oponente
-                    var randomoponente = Math.floor(Math.random()* 100+500);
+                    var randomoponente = Math.floor(Math.random()* 500);
                     $(".ataqueoponente").text("tu oponente ataca de vuelta" + " " + randomoponente);
                     console.log(randomoponente);
 
@@ -142,23 +146,41 @@
                     $("#d1 p").html(restandoop);
 
 
+
+                    
+
                     //cuando yo llegue a cero, se acaba el juego
                     if(muestra <= 500){
                         $("#you p").html(0);
                         $(".miataque").text("GAME OVER");
                         $(".ataqueoponente").remove();
-                    }
-
-                    //cuando el oponente llegue a cero, elijo otro contrincante
-                    if(muestraop <= 0){                       
                         $("#d1").remove();
-                        $("#e2").appendTo("#d2");
-                        $("#e2").appendTo("#d1");
-                        
-                        
-                        
-                        
                     }
+                                      
+                    //cuando el oponente llegue a cero, elijo otro contrincante
+                    if(restandoop <= 0){    
+                        //aqui estoy aumentando una vida,
+                        //esto para luego de que mates a todos te salga cierto mensaje
+                        vidas ++;                     
+                        //aqui voy a ocultar el div del contrincante pasado,
+                        //puesto que ya lo derrotó                       
+                        $("#d1 div").appendTo("#d2").css("visibility","hidden");
+                        //aqui voy a poner al contrincante que le sigue en su posición
+                        $("#e2").appendTo("#d1");                      
+                        //aqui reseteo las vidas mias, y del oponente que quedó ahora,
+                        //para poder seguir peleando con el que sigue
+                        $("#you p").html(reset);
+                                                        
+                    }
+                    
+
+                    //aqui muestro pantalla de que ganaste, puesto
+                    //que has matado a todos                  
+                    if (vidas>=2) {
+                        $(".miataque").text("YOU KILL'EM ALL!!");
+                        $(".ataqueoponente").remove();
+                        }
+                  
 
                 });
 
@@ -168,24 +190,15 @@
             
 
 
-            
-
-            
-
+ 
             
         });
         
         
        
-        
-
-
 
 
     });
-
-
-
 
     </script>
 
@@ -193,10 +206,3 @@
 </body>
 </html>
 
-
-
-var restando= inicializar-randomyo+randomoponente;                
-$("#d1 p").html(restando);
-
-______
-clic.event();
