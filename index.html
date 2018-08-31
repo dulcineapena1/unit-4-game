@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script type="text/javascript" src="javascript/gamestar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Starwars</title>
+</head>
+<body>
+    <div id ="todosjuntos" class="todosjuntos"></div>
+    
+    <p>YOUR CHARACTER</p>
+    <div id ="you" class="you">YOU </div>
+
+    
+    <p>ENEMIES</p>
+    <div id="e1" class="e1"></div>
+    <div id="e2" class="e2"></div>
+
+    <button id="ataque" class="bo" value="ATTACK">ATTACKL</button>
+    <p>FIGHT</p>
+
+    <p>DEFENDER</p>
+    <div id ="d1" class="d1"></div>
+    <div id ="d2" class="d2"></div>
+    
+    <p class="miataque"></p>
+    <p class="ataqueoponente"></p>
+
+    
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        // array de personajes
+        var personaje =["van", "luke", "darth"];
+        
+        //variable para poder generar id dinamicamente y asì 
+        // cada div represente un personaje
+        var clasesd= 0;
+
+       //enseguida dinamicamente crearé los personajes jalados de la variable
+        for (var i = 0; i < personaje.length; i++){
+            // del resultado del loop se genera un número diferente que seran id's
+            clasesd ++;
+            //hace un nuevo div para cada elemento del array, con su respectivo id
+            var clasesdi = clasesd;
+            var hacerpersonajes = $("<div id ="+clasesdi+">");            
+            //los divs creados tendrán el contenido del array
+            hacerpersonajes.text(personaje[i]);
+
+            //muestro en el div que está en html (vacio) el resultado de este loop
+            $("#todosjuntos").append(hacerpersonajes);
+            // le pongo una clase diferente a cada div que cree dinámicamente
+            // ojo, las clases ya están en la hoja de estilos con la foto de cada personaje y la
+            //respectiva apariencia del div. 
+            //También estoy creando una p andentro de cada div, para después,
+            //en la pelea, manipular el número dentro de la p
+            $("#1").attr("class","c1").html("val"+ "<p></p>");
+            $("#2").attr("class","c2").html("luke"+"<p></p>");
+            $("#3").attr("class","c3").html("darth"+"<p></p>");
+            $("#1 p").html(3000);
+            $("#2 p").html(4000);
+            $("#3 p").html(5000);
+           
+
+            
+                      
+            
+        }
+
+        
+        //---enseguida voy a hacer los eventos de click para poder seleccionar a los oponentes
+        
+
+        
+        //aqui hago una función para seleccionar cualquier your character y el
+        //resto moverlos a enemigos
+        $("#1,#2,#3").on("click",function(event){
+           //con esto muevo el elemento clickeado a your character
+            $("#todosjuntos").find(this).appendTo("#you");
+            //y el resto de los elementos que queden al principio(los no seleccionados)
+            //se mueven como enemigos
+            $("#todosjuntos div").appendTo("#e1");
+            //lo que sigue lo puedes quitar si lo modificas desde css
+            $("#e1").css("width", "100%");
+
+
+
+            //Ya que seleccioné a your character, voy a seleccionar a mi oponente
+            //La función dice: cuando se haga clic en un div dentro del div de los enemigos
+            $("#e1 div").on("click",function(event){
+                //dentro de los enemigos encontrar el div clickeado (this) y moverlo a defender (oponente)
+                $("#e1").find(this).appendTo("#d1");
+                //aqui muevo el div que no se seleccionó como oponente a otro div para que
+                //siga permaneciendo como enemigo y posteriormente poder retomarlo.
+                //Recuerda que no lo puedes dejar en el mismo div de los enemigos
+                //porque esta función corre apartir de enemigos div y se solaparía.
+                $("#e1 div").appendTo("#e2");
+
+
+
+
+                //------ahora voy a hacer el puntaje de la pelea aquí, en esta parte del código,
+                // porque solo así el botón será valido al haber seleccionado contrincantes
+                // y no marcará score antes.
+
+                //inicio el score en el número que ya traia cada personaje,para poder utilizarlo más adelante
+                
+                var inicializar =100;
+               var inicio= 100;
+               
+                
+                
+                $("#ataque").on("click",function(){
+                    
+                    //genero número random para mi
+                    var randomyo = Math.floor(Math.random() * 100+500);
+                    $(".miataque").text("mi ataque es" + " " + randomyo);
+                    
+                    //genero número random para el oponente
+                    var randomoponente = Math.floor(Math.random()* 100+500);
+                    $(".ataqueoponente").text("tu oponente ataca de vuelta" + " " + randomoponente);
+                    console.log(randomoponente);
+
+                    
+                    //aquí hago la cuenta de mi score
+                    
+                    var muestra = $("#you p").html();
+                    var restandop= muestra-randomoponente;
+                    $("#you p").html(restandop);
+                    
+                                   
+                    //aquí hago la cuenta del score oponente
+                    var muestraop = $("#d1 p").html();
+                    var restandoop= muestraop-randomyo;
+                    $("#d1 p").html(restandoop);
+
+
+                    //cuando yo llegue a cero, se acaba el juego
+                    if(muestra <= 500){
+                        $("#you p").html(0);
+                        $(".miataque").text("GAME OVER");
+                        $(".ataqueoponente").remove();
+                    }
+
+                    //cuando el oponente llegue a cero, elijo otro contrincante
+                    if(muestraop <= 0){                       
+                        $("#d1").remove();
+                        $("#e2").appendTo("#d2");
+                        $("#e2").appendTo("#d1");
+                        
+                        
+                        
+                        
+                    }
+
+                });
+
+
+
+            });
+            
+
+
+            
+
+            
+
+            
+        });
+        
+        
+       
+        
+
+
+
+
+    });
+
+
+
+
+    </script>
+
+
+</body>
+</html>
+
+
+
+var restando= inicializar-randomyo+randomoponente;                
+$("#d1 p").html(restando);
+
+______
+clic.event();

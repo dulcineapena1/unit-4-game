@@ -1,0 +1,110 @@
+body{
+    background-image: url(http://s1.1zoom.me/big0/784/Star_Wars_Movies_Star_504968.jpg);
+    color:white;
+    font-size: 27px;
+}
+
+.c1{
+    background-image:url(https://akns-images.eonline.com/eol_images/Entire_Site/2017717/rs_1024x759-170817123328-1024.Alec-Guiness-Star-Wars.kg.081717.jpg?fit=inside|900:auto&output-quality=90);
+    
+    width: 200px;
+    background-size: 200px;
+    height: 100px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+
+    text-align: center;
+    border-style: ridge;
+    border-width: 10px;
+    font-size: 27px;
+    
+}
+.c2{
+    background-image: url(https://i.blogs.es/5ada58/luke2/450_1000.jpg);
+   
+    width: 200px;
+    background-size: 200px;
+    height: 100px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+
+
+    text-align: center;
+    border-style: ridge;
+    border-width: 10px;
+    font-size: 27px;
+}
+.c3{
+    background-image: url(https://vignette.wikia.nocookie.net/es.starwars/images/5/50/Darth_Maul_profile.png/revision/latest?cb=20150902165521);
+    width: 200px;
+    background-size: 200px;
+    height: 100px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+
+
+    text-align: center;
+    border-style: ridge;
+    border-width: 10px;
+    font-size: 27px;
+}
+
+p{
+    width: 100%;
+    margin: 0;
+    display: inline-block;
+}
+.you{
+    width: 200px;
+    background-size: 200px;
+    height: 160px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+}
+
+.e1{
+    width: 200px;
+    background-size: 200px;
+    height: 153px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+
+}
+.e2{
+    width: 200px;
+    background-size: 200px;
+    height: 153px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+}
+.d1{
+    width: 200px;
+    background-size: 200px;
+    height: 100px;
+    float: left;
+    margin-right: 5px;
+    color: white;
+}
+.bo{
+    width: 67px;
+    height: 20px;
+    display: flex;
+    clear: left
+}
+
+.miataque{
+    color:red;
+    font-size: 30px;
+    margin-top: 32px;
+}
+
+.ataqueoponente{
+    color:red;
+    font-size: 30px;
+}
