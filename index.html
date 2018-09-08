@@ -44,6 +44,7 @@
         // cada div represente un personaje
         var clasesd= 0;
 
+
        //enseguida dinamicamente crearé los personajes jalados de la variable
         for (var i = 0; i < personaje.length; i++){
             // del resultado del loop se genera un número diferente que seran id's
@@ -64,9 +65,9 @@
             $("#1").attr("class","c1").html("val"+ "<p></p>");
             $("#2").attr("class","c2").html("luke"+"<p></p>");
             $("#3").attr("class","c3").html("darth"+"<p></p>");
-            $("#1 p").html(3000);
-            $("#2 p").html(4000);
-            $("#3 p").html(5000);
+            $("#1 p").html(500);
+            $("#2 p").html(600);
+            $("#3 p").html(700);
            
 
             
@@ -116,25 +117,23 @@
                 // y no marcará score antes.
 
                 //inicio el score en el número que ya traia cada personaje,para poder utilizarlo más adelante
-                
-                
                var reset = $("#you p").html();
-               
                 
-                $("#ataque").on("click",function(){
-                    
-                    //genero número random para mi
-                    var randomyo = Math.floor(Math.random() * 500);
+                // esto es para inicializar el ataque mio y del oponente
+               var randomyo = 8;
+               var randomoponente = 25; 
+
+                $("#ataque").on("click",function(){  
+                    //cada que yo de click en atacar, se le sumara 8 a mi ataque                    
+                    randomyo +=8;
                     $(".miataque").text("mi ataque es" + " " + randomyo);
-                    
-                    //genero número random para el oponente
-                    var randomoponente = Math.floor(Math.random()* 500);
+
+                    //cada que de click en atacar mostrara el ataque que me da mi oponente
                     $(".ataqueoponente").text("tu oponente ataca de vuelta" + " " + randomoponente);
-                    console.log(randomoponente);
+                    
 
                     
-                    //aquí hago la cuenta de mi score
-                    
+                    //aquí hago la cuenta de mi score 
                     var muestra = $("#you p").html();
                     var restandop= muestra-randomoponente;
                     $("#you p").html(restandop);
@@ -150,7 +149,7 @@
                     
 
                     //cuando yo llegue a cero, se acaba el juego
-                    if(muestra <= 500){
+                    if(muestra <= 1){
                         $("#you p").html(0);
                         $(".miataque").text("GAME OVER");
                         $(".ataqueoponente").remove();
@@ -158,7 +157,15 @@
                     }
                                       
                     //cuando el oponente llegue a cero, elijo otro contrincante
-                    if(restandoop <= 0){    
+                    if(restandoop <= 0){
+                        // con las sig dos lineas reseteo el ataque inicial a 8 y
+                        // posteriormente le sumo 20, para que se haga mas fuerte el ataque
+                        // al elegir contrincante
+                        randomyo = 8;
+                        randomyo += 20;     
+                        // con lo sig le bajo al ataque del oponente, ya que
+                        //se debe bajar porque ya perdió una vez el contrincante
+                        randomoponente -=5;
                         //aqui estoy aumentando una vida,
                         //esto para luego de que mates a todos te salga cierto mensaje
                         vidas ++;                     
@@ -179,10 +186,34 @@
                     if (vidas>=2) {
                         $(".miataque").text("YOU KILL'EM ALL!!");
                         $(".ataqueoponente").remove();
+                        //aqui abajo creo un boton para empezar el juego otravez
+                        //encima del boton ataque
+                        
+                        $("#ataque").text("REINICIAR");
+                        $(".bo").on("click",function(){
+                        document.location.reload(true);
+                        });
+
+                        //aqui abajo creo un boton para empezar el juego otravez
+                        //var restart= $("<button>").attr("class", "bo2");
+                        //restart.val("reiniciar").text("REINICIAR");
+                        //$("body").append(restart);
+
+                        //$(".bo2").on("click",function(){
+                        //document.location.reload(true);
+                        //});
+
+
                         }
-                  
+
+
+
+                     
 
                 });
+
+
+
 
 
 

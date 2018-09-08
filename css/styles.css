@@ -92,7 +92,14 @@ p{
     color: white;
 }
 .bo{
-    width: 67px;
+    width: 91px;
+    height: 20px;
+    display: flex;
+    clear: left
+}
+
+.bo2{
+    width: 91px;
     height: 20px;
     display: flex;
     clear: left
